@@ -22,7 +22,6 @@ if($role === "student"){
 }else{
     $opposite = "Students";
 }
-
 ?>
 
 <!DOCTYPE html>

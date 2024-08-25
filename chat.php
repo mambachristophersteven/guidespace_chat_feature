@@ -7,6 +7,8 @@ if(!isset($_SESSION['username'])){
 
 }
 
+
+
 $username= $_SESSION['username'];
 $sql= "SELECT * FROM `users` WHERE username= '$username'";
 $result= mysqli_query($con,$sql);
@@ -14,6 +16,7 @@ $nums= mysqli_num_rows($result);
 $row= mysqli_fetch_assoc($result);
 $fname= $row['fname'];
 $lname= $row['lname'];
+$user_id= $row['unique_id'];
 $fullname = $fname." ".$lname;
 $role=$row['role'];
 
@@ -28,6 +31,26 @@ $lastname=" ".$rowview['lname'];
 $lecturerName = $firstname.$lastname;
 $lecRole=$rowview['role'];
 
+// echo $id;
+
+
+if(isset($_POST['submit'])){
+    $message=$_POST['message'];
+    $sender_id = $user_id;
+    $receiver_id = $id;
+    // echo $receiver_id;
+    // echo $sender_id;
+
+    $sqlinsert= "INSERT INTO `messages` (message,sender_id,receiver_id) VALUES ('$message','$sender_id','$receiver_id')";
+    $resultin= mysqli_query($con, $sqlinsert);
+    if($resultin){
+        header('location: ./chat.php?oomfid='.$receiver_id.'');
+        exit;
+    }
+    else{
+        die("error occurred: ".mysqli_error($con));
+    }
+}
 ?>
 
 
@@ -57,7 +80,6 @@ $lecRole=$rowview['role'];
                         $resultdisplay= mysqli_query($con, $sqldisplay);
                         if($resultdisplay){
                         while($rowdisplay=mysqli_fetch_assoc($resultdisplay)){
-                            $id=$rowdisplay['id'];
                             $unique_id=$rowdisplay['unique_id'];
                             $firstname=$rowdisplay['fname'];
                             $lastname=" ".$rowdisplay['lname'];
@@ -100,7 +122,38 @@ $lecRole=$rowview['role'];
                 <p class="role"><?php echo $lecRole;?></p>
             </div>
             <div class="right-chat">
-                <div class="chat">
+                <?php
+                    include './connection.php';
+                    $sqldisplay= "SELECT * FROM `messages` WHERE ( sender_id='$user_id' AND receiver_id='$id') OR  (sender_id='$user_id')";
+                    $resultdisplay= mysqli_query($con, $sqldisplay);
+                    if($resultdisplay){
+                    while($rowdisplay=mysqli_fetch_assoc($resultdisplay)){
+                        $received=$rowdisplay['message'];
+
+                        echo"
+                            <div class=\"chat\">
+                                <div class=\"message\">$received</div>
+                                <div class=\"by\">sender-name</div>
+                            </div>                  
+                        ";
+                    }
+                    }
+                    else{
+                    echo "
+                    <tr>
+                        <td><span class=\"material-symbols-outlined\">block</span></td>
+                        <td><span class=\"material-symbols-outlined\">block</span></td>
+                        <td><span class=\"material-symbols-outlined\">block</span></td>
+                        <td><span class=\"material-symbols-outlined\">block</span></td>
+                        <td><span class=\"material-symbols-outlined\">block</span></td>
+
+                    </tr>
+
+                    ";
+                    }
+
+                ?>
+                <!-- <div class="chat">
                     <div class="message">hello, madam</div>
                     <div class="by">sender-name</div>
                 </div>
@@ -111,12 +164,12 @@ $lecRole=$rowview['role'];
                 <div class="chat">
                     <div class="message">hello, madam</div>
                     <div class="by">sender-name</div>
-                </div>
+                </div> -->
             </div>
             <div class="message-box">
-                <form action="./chat.php">
+                <form action="./chat.php?oomfid=<?php echo $id;?>" method="post">
                     <input type="text" name="message" id="message" placeholder="type message">
-                    <input type="submit" value="send">
+                    <input type="submit" value="send" name="submit">
                 </form>
             </div>
         </div>

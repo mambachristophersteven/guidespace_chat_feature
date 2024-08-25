@@ -35,8 +35,8 @@ $role=$row['role'];
             <div class="profile">
                 <p class="name"><?php echo $fullname;?></p>
                 <p class="role"><?php echo $role;?></p>
-                <button><a href="#">logout</a></button>
             </div>
+            <button>logout</button>
             <div class="others">
                 <p class="side-title">lecturers available</p>
                 <div class="list">

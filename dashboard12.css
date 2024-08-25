@@ -5,6 +5,10 @@
     text-decoration: none;
 }
 
+a{
+    text-decoration: none;
+}
+
 
 .container{
     display: flex;
@@ -15,8 +19,71 @@
 }
 
 .left{
-    border: 2px solid black;
+    border: 2px solid blue;
     width: 35vw;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profile{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.name{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.role{
+    font-weight: lighter;
+    text-transform: capitalize;
+}
+
+.left button{
+    width: 200px;
+    background-color: black;
+    color: white;
+    height: 30px;
+    border: none;
+}
+
+.left button a{
+    text-decoration: none;
+}
+
+.others{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.others .side-title{
+    font-weight: bolder;
+    font-size: 32px;
+}
+
+.list{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.person{
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    border: 1px solid gray;
+}
+
+.person button{
+    width: 50px;
+    height: 20px;
 }
 
 .right{

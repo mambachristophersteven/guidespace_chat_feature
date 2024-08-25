@@ -3,7 +3,7 @@
 include './connection.php'; 
 session_start();
 if(!isset($_SESSION['username'])){
-    header("location: ../index.php");
+    header("location: ./login.php");
 
 }
 
@@ -36,7 +36,7 @@ $role=$row['role'];
                 <p class="name"><?php echo $fullname;?></p>
                 <p class="role"><?php echo $role;?></p>
             </div>
-            <button>logout</button>
+            <button onclick="location.href='./logout.php'">logout</button>
             <div class="others">
                 <p class="side-title">lecturers available</p>
                 <div class="list">
@@ -60,7 +60,7 @@ $role=$row['role'];
                                     <img src=\"\" alt=\"\">
                                     <p class=\"person-name\">$fullname</p>
                                 </div>
-                                <button onclick=\"location.href = 'chat.php?viewid=".$unique_id."'\">chat</button>
+                                <button onclick=\"location.href = 'chat.php?oomfid=".$unique_id."'\">chat</button>
                             </div>
                                                         
                             ";

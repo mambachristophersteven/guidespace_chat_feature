@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+
+.container{
+    display: flex;
+    width: 100vw;
+    min-height: 100vh;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.left{
+    border: 2px solid black;
+    width: 35vw;
+}
+
+.right{
+    border: 2px solid green;
+    width: 65vw;
+}

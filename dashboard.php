@@ -27,7 +27,7 @@ $role=$row['role'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat</title>
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="dashboard12.css">
 </head>
 <body>
     <div class="container">
@@ -35,13 +35,31 @@ $role=$row['role'];
             <div class="profile">
                 <p class="name"><?php echo $fullname;?></p>
                 <p class="role"><?php echo $role;?></p>
-                <button>logout</button>
+                <button><a href="#">logout</a></button>
             </div>
             <div class="others">
-                <p class="side-title">lectures available</p>
+                <p class="side-title">lecturers available</p>
+                <div class="list">
+                    <div class="person">
+                        <div class="person-top">
+                            <img src="" alt="">
+                            <p class="person-name">Madam Laud Bortey</p>
+                        </div>
+                        <button>chat</button>
+                    </div>
+                    <div class="person">
+                        <div class="person-top">
+                            <img src="" alt="">
+                            <p class="person-name">Madam Laud Bortey</p>
+                        </div>
+                        <button>chat</button>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="right"></div>
+        <div class="right">
+            <p class="select">choose someone to talk to </p>
+        </div>
     </div>
 </body>
 </html>

@@ -163,14 +163,6 @@ if(isset($_POST['submit'])){
                 <!-- <div class="chat">
                     <div class="message">hello, madam</div>
                     <div class="by">sender-name</div>
-                </div>
-                <div class="chat">
-                    <div class="message">hello, madam</div>
-                    <div class="by">sender-name</div>
-                </div>
-                <div class="chat">
-                    <div class="message">hello, madam</div>
-                    <div class="by">sender-name</div>
                 </div> -->
             </div>
             <div class="message-box">

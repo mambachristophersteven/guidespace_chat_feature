@@ -153,7 +153,6 @@ if(isset($_POST['submit'])){
                         <td><span class=\"material-symbols-outlined\">block</span></td>
                         <td><span class=\"material-symbols-outlined\">block</span></td>
                         <td><span class=\"material-symbols-outlined\">block</span></td>
-
                     </tr>
 
                     ";

@@ -17,6 +17,11 @@ $lname= $row['lname'];
 $fullname = $fname." ".$lname;
 $role=$row['role'];
 
+if($role === "student"){
+    $opposite = "Lecturers";
+}else{
+    $opposite = "Students";
+}
 
 ?>
 
@@ -38,12 +43,12 @@ $role=$row['role'];
             </div>
             <button onclick="location.href='./logout.php'">logout</button>
             <div class="others">
-                <p class="side-title">lecturers available</p>
+                <p class="side-title"><?php echo $opposite;?> available</p>
                 <div class="list">
                     <?php
 
                         include './connection.php';
-                        $sqldisplay= "SELECT * FROM `users`WHERE role='lecturer'";
+                        $sqldisplay= "SELECT * FROM `users` WHERE NOT role='$role'";
                         $resultdisplay= mysqli_query($con, $sqldisplay);
                         if($resultdisplay){
                         while($rowdisplay=mysqli_fetch_assoc($resultdisplay)){

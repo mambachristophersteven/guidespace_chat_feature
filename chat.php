@@ -20,6 +20,12 @@ $user_id= $row['unique_id'];
 $fullname = $fname." ".$lname;
 $role=$row['role'];
 
+if($role === "student"){
+    $opposite = "Lecturer";
+}else{
+    $opposite = "Student";
+}
+
 
 
 $id = $_GET['oomfid'];
@@ -76,7 +82,7 @@ if(isset($_POST['submit'])){
                     <?php
 
                         include './connection.php';
-                        $sqldisplay= "SELECT * FROM `users`WHERE role='lecturer'";
+                        $sqldisplay= "SELECT * FROM `users` WHERE NOT role='$role'";
                         $resultdisplay= mysqli_query($con, $sqldisplay);
                         if($resultdisplay){
                         while($rowdisplay=mysqli_fetch_assoc($resultdisplay)){
@@ -124,7 +130,7 @@ if(isset($_POST['submit'])){
             <div class="right-chat">
                 <?php
                     include './connection.php';
-                    $sqldisplay= "SELECT * FROM `messages` WHERE ( sender_id='$user_id' AND receiver_id='$id') OR  (sender_id='$user_id')";
+                    $sqldisplay= "SELECT * FROM `messages` WHERE ( sender_id='$user_id' AND receiver_id='$id') OR ( sender_id='$id' AND receiver_id='$user_id')";
                     $resultdisplay= mysqli_query($con, $sqldisplay);
                     if($resultdisplay){
                     while($rowdisplay=mysqli_fetch_assoc($resultdisplay)){

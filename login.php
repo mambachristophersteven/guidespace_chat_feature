@@ -14,77 +14,25 @@ if(isset($_POST['submit'])){
     else{
         if(empty($password)){
             $error = "Invalid login Credentials";
-        }
+        }         
         else{
-            $sql= "SELECT * FROM `admins` WHERE username='$username'";
-            $result= mysqli_query($con,$sql);
-            $nums= mysqli_num_rows($result);
-            if($nums>0){
-                $row= mysqli_fetch_assoc($result);
-                $hashedpasswordinDb =$row['password'];
-                $position=$row['position'];
-                $checkpassword=password_verify($password,$hashedpasswordinDb);
-                if($checkpassword){
-                    if($position==="Headmaster"){
-                        session_start();
-                        $_SESSION['username']= $username;
-                        header('location: ./headmaster/dashboardheadmaster.php');
-                    }
-                    if($position==="Technical Director"){
-                        session_start();
-                        $_SESSION['username']= $username;
-                        header('location: ./developer/dashboarddeveloper.php');
-                    }
-                    if($position==="System Developer"){
-                        session_start();
-                        $_SESSION['username']= $username;
-                        header('location: ./developer/dashboarddeveloper.php');
-                    }
-                    if($position==="Secretary S"){
-                        session_start();
-                        $_SESSION['username']= $username;
-                        header('location: ./secretaryS/dashboardsecretaryS.php');
-                    }
-                    if($position==="Secretary A"){
-                        session_start();
-                        $_SESSION['username']= $username;
-                        header('location: ./secretaryS/dashboardsecretaryS.php');
-                    }
-                    if($position==="Secretary B"){
-                        session_start();
-                        $_SESSION['username']= $username;
-                        header('location: ./secretaryS/dashboardsecretaryS.php');
-                    }
-                    if($position==="Financial Director"){
-                        session_start();
-                        $_SESSION['username']= $username;
-                        header('location: ./secretaryS/dashboardfinance.php');
-                    }
+            $sql1= "SELECT * FROM `users` WHERE username='$username'";
+            $result1= mysqli_query($con,$sql1);
+            $nums1= mysqli_num_rows($result1);
+            if($nums1>0){
+                $row1= mysqli_fetch_assoc($result1);
+                $passwordinDb1 =$row1['password'];
+                if($passwordinDb1 === $password){                  
+                    session_start();
+                    $_SESSION['username']= $username;
+                    header('location: ./dashboard.php');
                 }
                 else{
                     $error= "Invalid Login Credentials";
                 }
             }          
             else{
-                $sql1= "SELECT * FROM `teachers` WHERE username='$username'";
-                $result1= mysqli_query($con,$sql1);
-                $nums1= mysqli_num_rows($result1);
-                if($nums1>0){
-                    $row1= mysqli_fetch_assoc($result1);
-                    $hashedpasswordinDb1 =$row1['password'];
-                    $checkpassword1=password_verify($password,$hashedpasswordinDb1);
-                    if($checkpassword1){                  
-                        session_start();
-                        $_SESSION['username']= $username;
-                        header('location: ./teacher/dashboardteacher.php');
-                    }
-                    else{
-                        $error= "Invalid Login Credentials";
-                    }
-                }          
-                else{
-                    $error= "Invalid Login Credentials";
-                }
+                $error= "Invalid Login Credentials";
             }
         }
     }
@@ -104,10 +52,11 @@ if(isset($_POST['submit'])){
 <body>
     <div class="container">
         <div class="h2">Login</div>
-        <form action="">
+        <h4><?php echo $error;?></h4>
+        <form action="./login.php" method="post">
             <input type="text" name="username" id="username" placeholder="username">
             <input type="password" name="password" id="password" placeholder="password">
-            <input type="submit" value="login" name="password">
+            <input type="submit" value="login" name="submit">
         </form>
     </div>
 </body>

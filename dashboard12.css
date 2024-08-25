@@ -79,7 +79,6 @@ a{
     align-items: flex-end;
     justify-content: space-between;
     gap: 20px;
-    border: 1px solid gray;
 }
 
 .person button{

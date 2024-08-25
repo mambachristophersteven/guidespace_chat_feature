@@ -40,20 +40,47 @@ $role=$row['role'];
             <div class="others">
                 <p class="side-title">lecturers available</p>
                 <div class="list">
-                    <div class="person">
-                        <div class="person-top">
-                            <img src="" alt="">
-                            <p class="person-name">Madam Laud Bortey</p>
-                        </div>
-                        <button>chat</button>
-                    </div>
-                    <div class="person">
-                        <div class="person-top">
-                            <img src="" alt="">
-                            <p class="person-name">Madam Laud Bortey</p>
-                        </div>
-                        <button>chat</button>
-                    </div>
+                    <?php
+
+                        include './connection.php';
+                        $sqldisplay= "SELECT * FROM `users`WHERE role='lecturer'";
+                        $resultdisplay= mysqli_query($con, $sqldisplay);
+                        if($resultdisplay){
+                        while($rowdisplay=mysqli_fetch_assoc($resultdisplay)){
+                            $id=$rowdisplay['id'];
+                            $unique_id=$rowdisplay['unique_id'];
+                            $firstname=$rowdisplay['fname'];
+                            $lastname=" ".$rowdisplay['lname'];
+                            $role=$rowdisplay['role'];
+                            $fullname=$firstname.$lastname;
+
+                            echo"
+                            <div class=\"person\">
+                                <div class=\"person-top\">
+                                    <img src=\"\" alt=\"\">
+                                    <p class=\"person-name\">$fullname</p>
+                                </div>
+                                <button onclick=\"location.href = 'chat.php?viewid=".$unique_id."'\">chat</button>
+                            </div>
+                                                        
+                            ";
+                        }
+                        }
+                        else{
+                        echo "
+                        <tr>
+                            <td><span class=\"material-symbols-outlined\">block</span></td>
+                            <td><span class=\"material-symbols-outlined\">block</span></td>
+                            <td><span class=\"material-symbols-outlined\">block</span></td>
+                            <td><span class=\"material-symbols-outlined\">block</span></td>
+                            <td><span class=\"material-symbols-outlined\">block</span></td>
+
+                        </tr>
+
+                        ";
+                        }
+                    
+        ?>
                 </div>
             </div>
         </div>

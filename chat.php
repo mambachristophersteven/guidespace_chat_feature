@@ -41,7 +41,7 @@ if(isset($_POST['submit'])){
     // echo $receiver_id;
     // echo $sender_id;
 
-    $sqlinsert= "INSERT INTO `messages` (message,sender_id,receiver_id) VALUES ('$message','$sender_id','$receiver_id')";
+    $sqlinsert= "INSERT INTO `messages` (message,sender_id,receiver_id,sender_name,receiver_name) VALUES ('$message','$sender_id','$receiver_id','$fullname','$lecturerName')";
     $resultin= mysqli_query($con, $sqlinsert);
     if($resultin){
         header('location: ./chat.php?oomfid='.$receiver_id.'');
@@ -129,11 +129,12 @@ if(isset($_POST['submit'])){
                     if($resultdisplay){
                     while($rowdisplay=mysqli_fetch_assoc($resultdisplay)){
                         $received=$rowdisplay['message'];
+                        $sender_nametext=$rowdisplay['sender_name'];
 
                         echo"
                             <div class=\"chat\">
                                 <div class=\"message\">$received</div>
-                                <div class=\"by\">sender-name</div>
+                                <div class=\"by\">$sender_nametext</div>
                             </div>                  
                         ";
                     }
